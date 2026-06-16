@@ -1,0 +1,195 @@
+
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "type": "object",
+      "description": "User account registry for division personnel.",
+      "properties": {
+        "id": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "unitId": { "type": "string" },
+        "role": { "type": "string" },
+        "isAdmin": { "type": "boolean" },
+        "isActive": { "type": "boolean" },
+        "employeeId": { "type": "string", "description": "7-digit DepEd ID." },
+        "phoneNumber": { "type": "string", "description": "11-digit contact number." },
+        "profilePicture": { "type": "string", "description": "Base64 encoded profile image." },
+        "profileScale": { "type": "number", "description": "Zoom level for profile photo." },
+        "profilePosX": { "type": "number", "description": "X-axis offset for profile photo." },
+        "profilePosY": { "type": "number", "description": "Y-axis offset for profile photo." },
+        "status": { "type": "string", "enum": ["On Duty", "On Leave", "On Official Business", "Absent"] }
+      }
+    },
+    "PublicInquiry": {
+      "title": "PublicInquiry",
+      "type": "object",
+      "description": "Public appointment request data.",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "targetUnitId": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "status": { "type": "string" },
+        "submittedBy": { "type": "string" },
+        "inquirerPhone": { "type": "string" },
+        "inquirerEmail": { "type": "string", "format": "email" },
+        "meetingDate": { "type": "string" },
+        "meetingTime": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "SchoolInfrastructure": {
+      "title": "SchoolInfrastructure",
+      "type": "object",
+      "description": "Registry of school building projects and facilities.",
+      "properties": {
+        "projectId": { "type": "string" },
+        "schoolName": { "type": "string" },
+        "municipality": { "type": "string" },
+        "scopeOfWork": { "type": "string" },
+        "projectCost": { "type": "string" },
+        "contractorName": { "type": "string" },
+        "status": { "type": "string" },
+        "latestAccomplishment": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Donation": {
+      "title": "Donation",
+      "type": "object",
+      "description": "Stakeholder contributions and partnership resources.",
+      "properties": {
+        "donorName": { "type": "string" },
+        "amountValue": { "type": "number" },
+        "type": { "type": "string" },
+        "beneficiarySchoolId": { "type": "string" },
+        "receivedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "DivisionEvent": {
+      "title": "DivisionEvent",
+      "type": "object",
+      "description": "Calendar activities and internal tasks.",
+      "properties": {
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "type": { "type": "string", "enum": ["Event", "Task"] }
+      }
+    },
+    "Broadcast": {
+      "title": "Broadcast",
+      "type": "object",
+      "description": "Strategic intelligence announcements.",
+      "properties": {
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "audience": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Mail": {
+      "title": "Mail",
+      "type": "object",
+      "description": "Schema for the Trigger Email extension.",
+      "properties": {
+        "to": { "type": "array", "items": { "type": "string" } },
+        "message": {
+          "type": "object",
+          "properties": {
+            "subject": { "type": "string" },
+            "html": { "type": "string" }
+          }
+        }
+      }
+    },
+    "LearnerRightsReport": {
+      "title": "LearnerRightsReport",
+      "type": "object",
+      "description": "Violation and rights reports for Project Kabataang LEGAL.",
+      "properties": {
+        "schoolName": { "type": "string" },
+        "district": { "type": "string" },
+        "schoolId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "lrn": { "type": "string" },
+        "concern": { "type": "string" },
+        "witnessName": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "status": { "type": "string" },
+        "submittedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "YouthAnnouncement": {
+      "title": "YouthAnnouncement",
+      "type": "object",
+      "description": "Official bulletins for the Youth Formation unit.",
+      "properties": {
+        "message": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "YouthPost": {
+      "title": "YouthPost",
+      "type": "object",
+      "description": "Social feed posts for youth activities.",
+      "properties": {
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorUnit": { "type": "string" },
+        "acknowledgedBy": { "type": "array", "items": { "type": "string" }, "description": "List of user UIDs who acknowledged the post." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "auth": {
+    "providers": ["password", "anonymous"]
+  },
+  "firestore": {
+    "/user_profiles/{userId}": {
+      "schema": "#/backend/entities/UserProfile",
+      "description": "Personnel records."
+    },
+    "/public_assistance_tickets/{ticketId}": {
+      "schema": "#/backend/entities/PublicInquiry",
+      "description": "Appointment assistance queue."
+    },
+    "/school_infrastructure/{infraId}": {
+      "schema": "#/backend/entities/SchoolInfrastructure",
+      "description": "Facility project registry."
+    },
+    "/donations/{donationId}": {
+      "schema": "#/backend/entities/Donation",
+      "description": "Partnership registry."
+    },
+    "/division_events/{eventId}": {
+      "schema": "#/backend/entities/DivisionEvent",
+      "description": "Operational calendar."
+    },
+    "/broadcasts/{broadcastId}": {
+      "schema": "#/backend/entities/Broadcast",
+      "description": "Division announcements."
+    },
+    "/mail/{mailId}": {
+      "schema": "#/backend/entities/Mail",
+      "description": "Outgoing email queue."
+    },
+    "/learner_rights_reports/{reportId}": {
+      "schema": "#/backend/entities/LearnerRightsReport",
+      "description": "Legal reports queue."
+    },
+    "/youth_announcements/{docId}": {
+      "schema": "#/backend/entities/YouthAnnouncement",
+      "description": "Youth formation bulletins."
+    },
+    "/youth_posts/{docId}": {
+      "schema": "#/backend/entities/YouthPost",
+      "description": "Youth social feed."
+    }
+  }
+}

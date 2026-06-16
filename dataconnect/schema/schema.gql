@@ -1,0 +1,37 @@
+type User @table {
+  displayName: String!
+  email: String!
+  userType: String!
+  createdAt: Timestamp!
+  photoUrl: String
+}
+
+type Project @table {
+  name: String!
+  description: String!
+  status: String!
+  startDate: Date!
+  createdAt: Timestamp!
+  endDate: Date
+  budget: Float
+  creator: User
+}
+
+type ProgressUpdate @table {
+  description: String!
+  updateDate: Date!
+  createdAt: Timestamp!
+  attachments: [String]
+  project: Project
+  updater: User
+}
+
+type Inquiry @table {
+  subject: String!
+  message: String!
+  createdAt: Timestamp!
+  status: String!
+  reply: String
+  project: Project
+  inquirer: User
+}
