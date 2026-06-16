@@ -1,0 +1,111 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function getUserData() {
+      let path = /databases/$(database)/documents/user_profiles/$(request.auth.uid);
+      return exists(path) ? get(path).data : null;
+    }
+
+    // Administrative Super-User Override
+    function isAdmin() {
+      let data = getUserData();
+      return isSignedIn() && (
+        request.auth.token.email == 'admin@admin.com' || 
+        (data != null && (data.unitId == 'SGOD' || data.isAdmin == true || data.role == 'Admin' || data.role == 'SGOD Chief'))
+      );
+    }
+
+    function isStaff() {
+      let data = getUserData();
+      return isSignedIn() && (
+        request.auth.token.email == 'admin@admin.com' ||
+        (data != null && (data.isActive == true || data.isAdmin == true || data.role == 'Admin'))
+      );
+    }
+
+    function isUnitStaff(unitId) {
+      let data = getUserData();
+      return isStaff() && (data.unitId == unitId || isAdmin());
+    }
+
+    match /user_profiles/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /public_assistance_tickets/{ticketId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isStaff();
+      allow delete: if isAdmin();
+    }
+
+    match /mail/{mailId} {
+      allow create: if isSignedIn();
+    }
+
+    match /division_events/{eventId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isStaff();
+    }
+    
+    match /broadcasts/{broadcastId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /school_infrastructure/{infraId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isStaff();
+    }
+
+    match /donations/{donationId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isStaff();
+    }
+
+    match /learner_rights_reports/{reportId} {
+      allow read: if isStaff() || (isSignedIn() && resource.data.submittedBy == request.auth.uid);
+      allow create: if isSignedIn();
+      allow update: if isStaff();
+    }
+
+    match /support_chats/{userId} {
+      allow read, write: if isOwner(userId) || isStaff();
+      match /messages/{msgId} {
+        allow read, write: if isOwner(userId) || isStaff();
+      }
+    }
+
+    match /global_config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Youth Formation Collections
+    match /youth_announcements/{docId} {
+      allow read: if true;
+      allow create, update, delete: if isStaff();
+    }
+
+    match /youth_posts/{docId} {
+      allow read: if true;
+      allow create: if isStaff();
+      // Allow any signed in user to toggle their own acknowledgment
+      allow update: if isSignedIn() && 
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['acknowledgedBy']));
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.authorId == request.auth.uid);
+    }
+  }
+}
