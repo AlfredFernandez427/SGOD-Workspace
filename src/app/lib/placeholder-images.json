@@ -1,0 +1,29 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "division-map",
+      "description": "Satellite view of Davao del Sur division schools",
+      "imageUrl": "https://picsum.photos/seed/divmap/800/600",
+      "imageHint": "satellite map"
+    },
+    {
+      "id": "hero-bg",
+      "description": "Blurred cinematic background for SGOD hero section",
+      "imageUrl": "https://picsum.photos/seed/sgodhero/1920/1080",
+      "imageHint": "office building"
+    },
+    {
+      "id": "gad-hero",
+      "description": "Abstract background for Gender & Development",
+      "imageUrl": "https://picsum.photos/seed/gadhero/1200/400",
+      "imageHint": "community diversity"
+    },
+    {
+      "id": "smme-hero",
+      "description": "Professional background for SMME Monitoring section",
+      "imageUrl": "https://picsum.photos/seed/smmehero/1200/400",
+      "imageHint": "office administration"
+    }
+  ]
+}

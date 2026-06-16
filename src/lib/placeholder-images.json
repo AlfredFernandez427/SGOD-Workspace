@@ -1,0 +1,16 @@
+{
+  "placeholderImages": [
+    {
+      "id": "division-map",
+      "description": "Satellite view of Davao del Sur division schools",
+      "imageUrl": "https://picsum.photos/seed/divmap/800/600",
+      "imageHint": "satellite map"
+    },
+    {
+      "id": "hero-bg",
+      "description": "Blurred cinematic background for SGOD hero section",
+      "imageUrl": "https://picsum.photos/seed/sgodhero/1920/1080",
+      "imageHint": "office building"
+    }
+  ]
+}
