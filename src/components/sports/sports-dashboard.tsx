@@ -1,0 +1,37 @@
+"use client";
+
+import React from 'react';
+import { Trophy, Medal } from 'lucide-react';
+
+export function SportsDashboard() {
+  return (
+    <div className="space-y-10 animate-in fade-in duration-700 h-full flex flex-col pt-10">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-4">
+        <div>
+          <h1 className="text-3xl font-black uppercase tracking-tight text-foreground">Sports Unit</h1>
+          <p className="text-[11px] font-bold text-muted-foreground uppercase mt-2 tracking-widest">Physical Education & Athletic Registry</p>
+        </div>
+      </div>
+      
+      <div className="bg-card border border-border rounded-[3rem] p-12 sm:p-24 text-center bg-secondary/5 relative w-full shadow-3xl overflow-hidden min-h-[500px] flex flex-col items-center justify-center">
+        {/* Background Watermark */}
+        <div className="absolute top-1/2 -right-20 -translate-y-1/2 opacity-[0.03] pointer-events-none">
+           <Trophy size={480} />
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+           <div className="w-24 h-24 rounded-[2rem] bg-emerald-500/10 flex items-center justify-center text-emerald-500 mx-auto shadow-inner">
+              <Trophy size={48} />
+           </div>
+           
+           <div className="space-y-4">
+              <h3 className="text-3xl font-black uppercase tracking-tighter">Athletic Command Center</h3>
+              <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+                Operational monitoring for school sports development and division-wide athletic competitions. Validating athlete registries and coordinating division-level meets.
+              </p>
+           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
