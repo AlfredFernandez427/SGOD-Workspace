@@ -23,7 +23,7 @@ export function KabataangLegalPortal() {
     { id: 'laws', label: 'Legal Orders', icon: Scale, color: 'bg-amber-400' },
     { id: 'disciplinary', label: 'Disciplinary Administrative Actions', icon: Gavel, color: 'bg-amber-400' },
     { id: 'emergency', label: 'Emergency Hotlines', icon: PhoneCall, color: 'bg-amber-400' },
-    { id: 'ldm', label: 'LDM', icon: BookOpen, color: 'bg-amber-400' },
+    { id: 'ldm', label: "Learner's Discipline Manual", icon: BookOpen, color: 'bg-amber-400' },
   ];
 
   const handleCategoryClick = (id: string) => {
