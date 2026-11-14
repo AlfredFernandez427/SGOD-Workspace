@@ -37,6 +37,13 @@ export function SportsDashboard() {
                 Operational monitoring for school sports development and division-wide athletic competitions. Validating athlete registries and coordinating division-level meets.
               </p>
            </div>
+
+           <Button 
+             onClick={handleLaunchPortal}
+             className="h-16 px-16 bg-primary text-white rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-primary/20 hover:scale-[1.02] transition-all flex items-center gap-3 mx-auto"
+           >
+             <Globe size={18} /> Launch Sports Portal <ExternalLink size={14} className="opacity-50" />
+           </Button>
         </div>
       </div>
     </div>
