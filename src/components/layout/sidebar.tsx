@@ -35,7 +35,7 @@ import { doc } from 'firebase/firestore';
 
 const EXTERNAL_PORTALS: Record<string, string> = {
   'HRDD': 'https://sites.google.com/view/learninganddevelopmentportal/home',
-  'DRRM': 'https://drrm.sdodavsur.com'
+  'DRRM': 'https://drrm.sdodavsur.com',
   'Sports': 'https://sports.sdodavsur.com'
 };
 
