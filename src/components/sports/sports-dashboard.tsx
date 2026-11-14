@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Trophy, Medal } from 'lucide-react';
+import { Trophy, Globe, Medal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function SportsDashboard() {
