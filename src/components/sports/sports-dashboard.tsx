@@ -4,6 +4,13 @@ import React from 'react';
 import { Trophy, Medal } from 'lucide-react';
 
 export function SportsDashboard() {
+
+  const SPORTS_PORTAL_URL = "https://sports.sdodavsur.com";
+
+  const handleLaunchPortal = () => {
+    window.open(SPORTS_PORTAL_URL, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="space-y-10 animate-in fade-in duration-700 h-full flex flex-col pt-10">
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-4">
