@@ -32,7 +32,9 @@ import { useUser } from '@/firebase';
 
 const EXTERNAL_PORTALS: Record<string, string> = {
   'HRDD': 'https://sites.google.com/view/learninganddevelopmentportal/home',
-  'DRRM': 'https://sites.google.com/view/drrms/home?authuser=0'
+  'DRRM': 'https://drrm.sdodavsur.com'
+  'Sports': 'https://sports.sdodavsur.com'
+  
 };
 
 export function PortalNavbar() {
