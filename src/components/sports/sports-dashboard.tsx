@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Trophy, Medal } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function SportsDashboard() {
 
