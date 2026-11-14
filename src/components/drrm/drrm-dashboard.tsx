@@ -5,7 +5,7 @@ import { Shield, Globe, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function DRRMDashboard() {
-  const DRRM_PORTAL_URL = "https://sites.google.com/view/drrms/home?authuser=0";
+  const DRRM_PORTAL_URL = "https://drrm.sdodavsur.com";
 
   const handleLaunchPortal = () => {
     window.open(DRRM_PORTAL_URL, '_blank', 'noopener,noreferrer');
